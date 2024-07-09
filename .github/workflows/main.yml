@@ -20,11 +20,13 @@ jobs:
       # Validate branch name
       - name: Validate branch name
         run: |
+          echo "Validating branch name..."
           BRANCH_NAME=${GITHUB_REF#refs/heads/}
           if [[ "$BRANCH_NAME" != name/* ]]; then
             echo "Branch name does not follow the required pattern."
             exit 1
           fi
+          echo "Branch name is valid."
 
       # Set up Node.js environment
       - name: Set up Node.js
@@ -34,12 +36,18 @@ jobs:
 
       # Install dependencies
       - name: Install dependencies
-        run: npm install
+        run: |
+          echo "Installing dependencies..."
+          npm install
 
       # Run tests
       - name: Run tests
-        run: npm test
+        run: |
+          echo "Running tests..."
+          npm test
 
       # Build the project
       - name: Build project
-        run: npm run build
+        run: |
+          echo "Building the project..."
+          npm run build
