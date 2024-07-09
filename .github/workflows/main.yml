@@ -23,8 +23,8 @@ jobs:
           echo "Validating branch name..."
           BRANCH_NAME=${GITHUB_REF#refs/heads/}
           echo "Current branch: $BRANCH_NAME"
-          if [[ "$BRANCH_NAME" != name/* ]]; then
-            echo "Branch name does not follow the required pattern."
+          if [[ ! "$BRANCH_NAME" =~ ^name/[a-zA-Z0-9_-]+$ ]]; then
+            echo "Branch name does not follow the required pattern (name/branchname)."
             exit 1
           fi
           echo "Branch name is valid."
@@ -52,4 +52,3 @@ jobs:
         run: |
           echo "Building the project..."
           npm run build
-
