@@ -16,12 +16,13 @@ jobs:
       # Checkout the repository
       - name: Checkout repository
         uses: actions/checkout@v2
-      
+
       # Validate branch name
       - name: Validate branch name
         run: |
           echo "Validating branch name..."
           BRANCH_NAME=${GITHUB_REF#refs/heads/}
+          echo "Current branch: $BRANCH_NAME"
           if [[ "$BRANCH_NAME" != name/* ]]; then
             echo "Branch name does not follow the required pattern."
             exit 1
@@ -51,3 +52,4 @@ jobs:
         run: |
           echo "Building the project..."
           npm run build
+
